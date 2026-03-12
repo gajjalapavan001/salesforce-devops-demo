@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin"
-    }
-
     stages {
 
         stage('Checkout Code') {
@@ -15,17 +11,17 @@ pipeline {
 
         stage('Run Apex Tests') {
             steps {
-                sh 'sf apex run test --synchronous --wait 10'
+                sh '/opt/homebrew/bin/sf apex run test --synchronous --wait 10'
             }
         }
 
-        stage('Deploy to Dev Org') {
+        stage('Deploy Dev') {
             steps {
                 sh 'echo Deploying to Dev'
             }
         }
 
-        stage('Deploy to QA Org') {
+        stage('Deploy QA') {
             steps {
                 sh 'echo Deploying to QA'
             }
@@ -33,11 +29,13 @@ pipeline {
 
         stage('Approval for Production') {
             steps {
-                input message: 'Approve Production Deployment?'
+                timeout(time: 1, unit: 'HOURS') {
+                    input message: 'Approve Production Deployment?'
+                }
             }
         }
 
-        stage('Deploy to Production') {
+        stage('Deploy Production') {
             steps {
                 sh 'echo Deploying to Production'
             }
