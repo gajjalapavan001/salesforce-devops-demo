@@ -3,9 +3,9 @@ pipeline {
 
     stages {
 
-        stage('Clone Repo') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/gajjalapavan001/salesforce-devops-demo.git'
+                git branch: 'main', url: 'https://github.com/gajjalapavan001/salesforce-devops-demo.git'
             }
         }
 
