@@ -21,7 +21,19 @@ pipeline {
 
         stage('Deploy to Dev Org') {
             steps {
-                sh 'sf project deploy start'
+                sh 'sf project deploy start --target-org devOrg'
+            }
+        }
+
+        stage('Deploy to QA Org') {
+            steps {
+                sh 'sf project deploy start --target-org qaOrg'
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                sh 'sf project deploy start --target-org prodOrg'
             }
         }
 
