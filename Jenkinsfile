@@ -5,35 +5,21 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'master', url: 'https://github.com/gajjalapavan001/salesforce-devops-demo.git'
+                git 'https://github.com/gajjalapavan001/salesforce-devops-demo.git'
             }
         }
 
         stage('Run Apex Tests') {
             steps {
-                sh '/opt/homebrew/bin/sf apex run test --synchronous --wait 10 || true'
+                sh 'sf apex run test --wait 10'
             }
         }
 
-        stage('Deploy Dev') {
+        stage('Deploy to Dev Org') {
             steps {
-                sh 'echo Deploying to Dev Org'
-            }
-        }
-
-        stage('Deploy QA') {
-            steps {
-                sh 'echo Deploying to QA Org'
-            }
-        }
-
-        stage('Deploy Production') {
-            steps {
-                sh 'echo Deploying to Production Org'
+                sh 'sf project deploy start'
             }
         }
 
     }
 }
-// trigger new build
-// test build trigger
