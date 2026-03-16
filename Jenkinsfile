@@ -15,7 +15,7 @@ pipeline {
 
         stage('Run Apex Tests') {
             steps {
-                sh 'sf apex run test --wait 10'
+                sh 'sf apex run test --code-coverage --wait 10'
             }
         }
 
