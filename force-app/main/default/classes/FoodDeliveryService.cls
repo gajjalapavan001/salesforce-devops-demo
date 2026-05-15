@@ -10,3 +10,6 @@ public with sharing class FoodDeliveryService {
 public static void processOrder() {
     System.debug('Payment flow updated');
 }
+public static void processOrder() {
+    System.debug('Cancel flow updated');
+}
